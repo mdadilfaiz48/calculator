@@ -1,0 +1,59 @@
+<div class="calculator-container">
+  <!-- Floating Background Symbols -->
+  <div class="floating-symbols" aria-hidden="true">
+    @for (sym of floatingSymbols; track sym.char + sym.left) {
+      <span
+        class="float-symbol"
+        [style.animationDelay]="sym.delay"
+        [style.animationDuration]="sym.duration"
+        [style.left]="sym.left"
+        [style.fontSize]="sym.size"
+      >{{ sym.char }}</span>
+    }
+  </div>
+
+  <!-- Ambient Ambient Glow -->
+  <div class="glow-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- Calculator Main Card -->
+  <div class="calculator-card" #calculatorCard id="calculator-card">
+    <!-- Display Section -->
+    <div class="display-container">
+      <div class="expression-line">{{ expression() }}</div>
+      <div class="main-display" [class.error]="formattedDisplay() === 'Error'">
+        {{ formattedDisplay() }}
+      </div>
+    </div>
+
+    <!-- Keypad Section -->
+    <div class="keypad">
+      <button class="key key-func" (click)="onClear()" aria-label="Clear All">AC</button>
+      <button class="key key-func" (click)="onDelete()" aria-label="Delete">⌫</button>
+      <button class="key key-func" (click)="onOperator('%')" aria-label="Percent">%</button>
+      <button class="key key-op" (click)="onOperator('÷')" aria-label="Divide">÷</button>
+
+      <button class="key key-num" (click)="onDigit('7')">7</button>
+      <button class="key key-num" (click)="onDigit('8')">8</button>
+      <button class="key key-num" (click)="onDigit('9')">9</button>
+      <button class="key key-op" (click)="onOperator('×')" aria-label="Multiply">×</button>
+
+      <button class="key key-num" (click)="onDigit('4')">4</button>
+      <button class="key key-num" (click)="onDigit('5')">5</button>
+      <button class="key key-num" (click)="onDigit('6')">6</button>
+      <button class="key key-op" (click)="onOperator('−')" aria-label="Subtract">−</button>
+
+      <button class="key key-num" (click)="onDigit('1')">1</button>
+      <button class="key key-num" (click)="onDigit('2')">2</button>
+      <button class="key key-num" (click)="onDigit('3')">3</button>
+      <button class="key key-op" (click)="onOperator('+')" aria-label="Add">+</button>
+
+      <button class="key key-num" (click)="onToggleSign()">±</button>
+      <button class="key key-num" (click)="onDigit('0')">0</button>
+      <button class="key key-num" (click)="onDecimal()">.</button>
+      <button class="key key-equal" (click)="onEquals()" aria-label="Equals">=</button>
+    </div>
+  </div>
+</div>
